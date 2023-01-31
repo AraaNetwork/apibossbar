@@ -360,7 +360,7 @@ class BossBar
 	{
 		$pk->title = $this->getFullTitle();
 		$pk->healthPercent = $this->getPercentage();
-		$pk->unknownShort = 1;
+		$pk->darkenScreen = false;
 		$pk->color = 0;//Does not function anyways
 		$pk->overlay = 0;//Neither. Typical for Mojang: Copy-pasted from Java edition
 		return $pk;

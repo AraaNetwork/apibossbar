@@ -8,6 +8,7 @@ use pocketmine\entity\Attribute;
 use pocketmine\entity\AttributeFactory;
 use pocketmine\entity\AttributeMap;
 use pocketmine\entity\Entity;
+use pocketmine\network\mcpe\NetworkBroadcastUtils;
 use pocketmine\network\mcpe\protocol\BossEventPacket;
 use pocketmine\network\mcpe\protocol\RemoveActorPacket;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataCollection;
@@ -260,7 +261,7 @@ class BossBar
 		else {
 			$pk = new RemoveActorPacket();
 			$pk->actorUniqueId = $this->actorId;
-			Server::getInstance()->broadcastPackets($this->getPlayers(), [$pk]);
+            NetworkBroadcastUtils::broadcastPackets($this->getPlayers(), [$pk]);
 		}
 		if ($entity instanceof Entity) {
 			$this->actorId = $entity->getId();
@@ -338,7 +339,7 @@ class BossBar
 		$pk = new UpdateAttributesPacket();
 		$pk->actorRuntimeId = $this->actorId;
 		$pk->entries = $this->getAttributeMap()->needSend();
-		Server::getInstance()->broadcastPackets($players, [$pk]);
+        NetworkBroadcastUtils::broadcastPackets($players, [$pk]);
 	}
 
 	/**
